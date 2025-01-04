@@ -10,4 +10,19 @@
             (#{df.dishId}, #{df.name}, #{df.value})
         </foreach>
     </insert>
+    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+        SELECT d.*, c.name AS categoryName FROM dish d LEFT OUTER JOIN category c ON d.category_id = c.id
+        <where>
+            <if test="name != null">
+                AND d.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                AND d.category_Id = #{categoryId}
+            </if>
+            <if test="categoryId != null">
+                AND d.category_Id = #{categoryId}
+            </if>
+        </where>
+        ORDER BY d.create_time DESC
+    </select>
 </mapper>
