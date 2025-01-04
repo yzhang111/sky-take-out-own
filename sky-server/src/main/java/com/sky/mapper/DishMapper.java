@@ -3,6 +3,7 @@ package com.sky.mapper;
 import com.sky.annotation.AutoFill;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,19 @@ public interface DishMapper {
 
     @AutoFill(value = OperationType.INSERT)
     void insert(Dish dish);
+
+    /**
+     * 根据主键查询菜品
+     * @param id
+     * @return
+     */
+    @Select("SELECT * FROM dish WHERE id = #{id}")
+    Dish getById(Long id);
+
+    /**
+     * 根据主键删除菜品
+     * @param id
+     */
+    @Delete("DELETE FROM dish WHERE id = #{id}")
+    void deleteById(Long id);
 }
