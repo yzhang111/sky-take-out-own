@@ -25,4 +25,10 @@
         </where>
         ORDER BY d.create_time DESC
     </select>
+    <delete id="deleteByDishIds">
+        delete from dish_flavor where dish_id in
+        <foreach collection="dishIds" open="(" close=")" separator="," item="id">
+            (#{id})
+        </foreach>
+    </delete>
 </mapper>
